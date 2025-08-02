@@ -1,16 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TreeEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 enum AnimState : int
 {
-    NONE =  0,
-    UP   =  1,
+    NONE = 0,
+    UP = 1,
     DOWN = -1
 }
 public class AppLoop : app, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
+    // types and weights
+    static readonly (Type, int)[] s_pReelTypes = new (Type, int)[] {
+        ( typeof( Cooking ), 10 ),
+        ( typeof( News ), 10 ),
+        ( typeof( Cat ), 10 ),
+        ( typeof( Crosspost ), 10 ),
+    };
+    static readonly Dictionary<Type, LoopVideo[]> s_mapReelVideos = new();
     float m_fScrollProgress;
     float m_fDragStartScroll;
     Reel m_pTopReel;
@@ -43,14 +55,45 @@ public class AppLoop : app, IDragHandler, IBeginDragHandler, IEndDragHandler
     void OnEnable()
     {
         m_fScrollProgress = 0.0f;
-        Reel[] pReels = transform.parent.GetComponentsInChildren<Reel>();
+        Reel[] pReels = transform.GetComponentsInChildren<Reel>();
         m_pRectTransform = GetComponent<RectTransform>();
 
-        m_pTopReel = pReels[ 0 ];
-        m_pBotReel = pReels[ 1 ];
-
+        m_pTopReel = pReels[0];
+        m_pBotReel = pReels[1];
         m_pTopReel.Pos = 0.0f;
         m_pBotReel.Pos = -1.0f;
+
+        s_mapReelVideos.Clear();
+        foreach ( (Type, int) pReelType in s_pReelTypes )
+            s_mapReelVideos.Add( pReelType.Item1, GetComponentsInChildren( pReelType.Item1, true ).Select( e => (LoopVideo)e ).ToArray() );
+
+        SelectNextVideo( m_pTopReel );
+        SelectNextVideo( m_pBotReel );
+
+        GetComponentsInChildren<LoopVideo>();
+    }
+
+    void SelectNextVideo( Reel pReel )
+    {
+        System.Random r = new();
+        int iTotalWeightCount = 0;
+        foreach ( (Type, int) pReelType in s_pReelTypes )
+            iTotalWeightCount += pReelType.Item2;
+        float fRandomVal = r.Next( iTotalWeightCount );
+        int iCurrentWeightCount = 0;
+        foreach ( (Type, int) pReelType in s_pReelTypes )
+        {
+            iCurrentWeightCount += pReelType.Item2;
+            if ( iCurrentWeightCount > fRandomVal )
+            {
+                LoopVideo[] pVideos = s_mapReelVideos[ pReelType.Item1 ];
+                LoopVideo pVideo = pVideos[ r.Next( pVideos.Length ) ];
+                pReel.SetFrames( pVideo.GetComponentsInChildren<RawImage>().Select( i => i.texture ) );
+                break;
+            }
+        }
+
+
     }
 
     // Update is called once per frame
@@ -72,6 +115,7 @@ public class AppLoop : app, IDragHandler, IBeginDragHandler, IEndDragHandler
                     m_pTopReel.Pos -= 2;
                     m_fScrollProgress = 0.0f;
                     (m_pBotReel, m_pTopReel) = (m_pTopReel, m_pBotReel);
+                    SelectNextVideo( m_pBotReel );
                 }
                 m_iAnimState = AnimState.NONE;
                 return;

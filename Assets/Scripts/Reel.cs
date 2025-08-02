@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,16 +36,13 @@ public class Reel : MonoBehaviour
 
         m_pImage = GetComponent<RawImage>();
 
-        foreach ( RawImage i in transform.parent.GetComponentInChildren<cooking1>( true ).GetComponentsInChildren<RawImage>() )
-            m_pFrames.Add( i.texture );
-
         StartCoroutine( PlayVideo() );
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetFrames( IEnumerable<Texture> pFrames )
     {
-        
+        m_pFrames.Clear();
+        m_pFrames.AddRange( pFrames );
     }
 
     IEnumerator PlayVideo()
@@ -51,9 +50,12 @@ public class Reel : MonoBehaviour
         while ( true )
         {
             yield return new WaitForSeconds( 1.0f / FPS );
-            m_iAnimFrame++;
-            m_iAnimFrame %= m_pFrames.Count;
-            m_pImage.texture = m_pFrames[ m_iAnimFrame ];
+            if ( m_pFrames.Any() )
+            {
+                m_iAnimFrame++;
+                m_iAnimFrame %= m_pFrames.Count;
+                m_pImage.texture = m_pFrames[ m_iAnimFrame ];
+            }
         }
     }
 }

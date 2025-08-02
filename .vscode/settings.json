@@ -54,5 +54,15 @@
     "dotnet.defaultSolution": "Doomscroller.sln",
     "cSpell.enabledFileTypes": {
         "csharp": false
+    },
+    "razor.languageServer.useNewFormattingEngine": false,
+    "csharp.format.enable": false,
+    "omnisharp.useEditorFormattingSettings": false,
+    "razor.format.codeBlockBraceOnNextLine": false,
+    "razor.format.enable": false,
+    "dotnet.diagnostics.reportInformationAsHint": false,
+    "dotnet.quickInfo.showRemarksInQuickInfo": true,
+    "[csharp]": {
+        "editor.formatOnType": false
     }
 }
