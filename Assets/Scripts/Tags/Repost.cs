@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HomeButton : MonoBehaviour
+public class Repost : LoopVideo
 {
     // Start is called before the first frame update
     void Start()
@@ -14,11 +14,5 @@ public class HomeButton : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public void Press()
-    {
-        foreach ( App a in FindObjectsOfType<App>() )
-            a.gameObject.SetActive( false );
     }
 }
