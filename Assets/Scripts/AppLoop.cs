@@ -9,7 +9,7 @@ enum AnimState : int
     UP   =  1,
     DOWN = -1
 }
-public class AppLoop : app, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class AppLoop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     float m_fScrollProgress;
     float m_fDragStartScroll;
@@ -46,11 +46,11 @@ public class AppLoop : app, IDragHandler, IBeginDragHandler, IEndDragHandler
         Reel[] pReels = transform.parent.GetComponentsInChildren<Reel>();
         m_pRectTransform = GetComponent<RectTransform>();
 
-        m_pTopReel = pReels[ 0 ];
-        m_pBotReel = pReels[ 1 ];
-
-        m_pTopReel.Pos = 0.0f;
-        m_pBotReel.Pos = -1.0f;
+        for ( int i = 0; i < 2; ++i )
+            if ( pReels[ i ].TopReel )
+                m_pTopReel = pReels[ i ];
+            else
+                m_pBotReel = pReels[ i ];
     }
 
     // Update is called once per frame
