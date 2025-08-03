@@ -6,23 +6,43 @@ using UnityEngine.SceneManagement;
 public class Controller : MonoBehaviour
 {
     public Canvas menu;
+    public Canvas options;
     public Animation startanim;
+    public Animation howtoanim;
     // Start is called before the first frame update
+    void Start()
+    {
+        options.enabled = false;
+    }
+
     public void LoadGame()
     {
         //menu.enabled = false;
-        StartCoroutine(CamAnim());
+        StartCoroutine(CamAnimStart());
     }
     public void LoadOptions()
     {
-        SceneManager.LoadSceneAsync("options");
+        menu.enabled = false;
+        options.enabled = true;
     }
     public void Quit()
     {
         Application.Quit();
     }
+    public void Back()
+    {
+        options.enabled = false;
+        menu.enabled = true; 
+    }
+    public void HowTo()
+    {
+        options.enabled = false;
+        menu.enabled = false;
+        StartCoroutine(CamAnimHowTo());
+    }
 
-    IEnumerator CamAnim()
+
+    IEnumerator CamAnimStart()
     {
         startanim.Play();
         while (true)
@@ -31,6 +51,16 @@ public class Controller : MonoBehaviour
             {
                 SceneManager.LoadSceneAsync("SampleScene");
             }
+            yield return null;
+        }
+    }
+    IEnumerator CamAnimHowTo()
+    {
+        howtoanim.Play();
+        while (true)
+        {
+            if (!howtoanim.isPlaying)
+            
             yield return null;
         }
     }
