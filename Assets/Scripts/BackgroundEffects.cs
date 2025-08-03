@@ -14,12 +14,24 @@ public class BackgroundEffects : MonoBehaviour
     Hunger m_pHunger;
     Stress m_pStress;
     MessageAlertNotif m_pMessageAlertNotif;
+    public Canvas badend;
+    public Canvas goodend;
+    public Canvas mainUI;
+    public Canvas screentime;
+    public Animation cameraAnim;
+    public GameObject phone;
 
     Slider[] m_pAllSliders;
     float m_fLoadTime;
+    bool hasPlayed;
 
     void OnEnable()
     {
+        badend.enabled = false;
+        goodend.enabled = false;
+        hasPlayed = false;
+        screentime.enabled = false;
+
         m_fLoadTime = Time.time;
         m_pAttention = GetComponentInChildren<Attention>();
         m_pHunger = GetComponentInChildren<Hunger>();
@@ -44,13 +56,26 @@ public class BackgroundEffects : MonoBehaviour
         {
             if ( slider.value == slider.maxValue )
             {
-
-                //game over
+                if (!hasPlayed)
+                {
+                    badend.enabled = true;
+                    mainUI.enabled = false;
+                    phone.SetActive(false);
+                    cameraAnim.Play();
+                    hasPlayed = true;
+                }
+                
             }
         }
+        print(Time.time - m_fLoadTime);
+
         if ( Time.time - m_fLoadTime > 60 * 4 )
         {
-            //game over (win)
+            if (!hasPlayed)
+            {
+                screentime.enabled = true;
+                hasPlayed = true;
+            }
         }
     }
 }

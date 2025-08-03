@@ -11,7 +11,7 @@ public class MessageAlert : MonoBehaviour
     void OnEnable()
     {
         m_pNotif = GetComponentInChildren<MessageAlertNotif>( true );
-        m_pTopBarNotif = transform.parent.GetComponentInChildren<MessageTopBarNotif>( true );
+        m_pTopBarNotif = transform.parent.parent.GetComponentInChildren<MessageTopBarNotif>( true );
         StartCoroutine( NewMessage() );
     }
 
