@@ -7,7 +7,7 @@ public class AppBreaths : App
     protected override void OnEnable()
     {
         base.OnEnable();
-        SetDeltas( (StatType.DEPRESSION, -0.05f) );
+        SetDeltas( (StatType.DEPRESSION, -0.05f), (StatType.STRESS, -0.05f) );
     }
 
     // Update is called once per frame
