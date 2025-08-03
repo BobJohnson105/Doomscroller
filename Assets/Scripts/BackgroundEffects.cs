@@ -67,7 +67,6 @@ public class BackgroundEffects : MonoBehaviour
                 
             }
         }
-        print(Time.time - m_fLoadTime);
 
         if ( Time.time - m_fLoadTime > 60 * 4 )
         {

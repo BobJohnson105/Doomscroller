@@ -2201,7 +2201,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 2bc6d24d0f8bb4695b46490e958d4ddd, type: 3}
+  m_Texture: {fileID: 2800000, guid: c75589ad9f552ef44ae3b2c09f03160d, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -2556,9 +2556,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 75875cef0b855874c8950e5bb7bfec38, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e2b929c826c2acd4b99a8ddf905657c0, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.6
+  m_Volume: 0.35
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3983,7 +3983,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.75
+  m_fontSize: 80.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5138,7 +5138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5628,7 +5628,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.05
+  m_fontSize: 80.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -11038,7 +11038,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.75
+  m_fontSize: 80.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -12074,7 +12074,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 17.4
+  m_fontSize: 63.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -14449,7 +14449,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21.95
+  m_fontSize: 77.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -15274,7 +15274,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a6f86a3e6e374444f8016f0818599ce5, type: 3}
       propertyPath: m_LocalScale.x
-      value: 50483.64
+      value: 47101.24
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a6f86a3e6e374444f8016f0818599ce5, type: 3}
       propertyPath: m_LocalScale.y
@@ -15290,11 +15290,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a6f86a3e6e374444f8016f0818599ce5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 378.53055
+      value: 350.85
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a6f86a3e6e374444f8016f0818599ce5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -113.906815
+      value: -113.73
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a6f86a3e6e374444f8016f0818599ce5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -17282,7 +17282,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.75
+  m_fontSize: 80.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -18175,10 +18175,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 657304165}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: -0.15, y: -0.05}
-  m_AnchorMax: {x: 1.15, y: 1.05}
+  m_AnchorMin: {x: -0.20116982, y: -0.02749481}
+  m_AnchorMax: {x: 1.1826366, y: 1.05}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -0.0000076293945, y: -0.000028133392}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2036812233
 MonoBehaviour:
@@ -18200,7 +18200,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 9bb2297f2ee1bdb73b23922123a84549, type: 3}
+  m_Texture: {fileID: 2800000, guid: 924168dc2a2766b4f98754319f1e1fe9, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
