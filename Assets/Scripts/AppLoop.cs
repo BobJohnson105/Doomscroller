@@ -6,6 +6,7 @@ using TreeEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static Globals;
 
 enum AnimState : int
 {
@@ -180,7 +181,7 @@ public class AppLoop : App, IDragHandler, IBeginDragHandler, IEndDragHandler
                 return;
             }
         }
-        if ( Input.GetKeyDown( KeyCode.DownArrow ) || Input.GetKey( KeyCode.DownArrow ) )
+        if ( InputEnabled && Input.GetKeyDown( KeyCode.DownArrow ) )
             m_iAnimState = AnimState.UP;
     }
 

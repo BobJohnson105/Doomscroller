@@ -2,6 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MessageAlertNotif : LoopVideo
+public class MessageAlertNotif : MonoBehaviour
 {
 }
