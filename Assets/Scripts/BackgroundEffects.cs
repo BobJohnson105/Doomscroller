@@ -11,9 +11,11 @@ public class BackgroundEffects : MonoBehaviour
     public float BoredomIncreaseDoublePeriod = 120.0f;
     Attention m_pAttention;
     Hunger m_pHunger;
+    float m_fLoadTime;
 
     void OnEnable()
     {
+        m_fLoadTime = Time.time;
         m_pAttention = GetComponentInChildren<Attention>();
         m_pHunger = GetComponentInChildren<Hunger>();
     }
@@ -22,7 +24,7 @@ public class BackgroundEffects : MonoBehaviour
     {
         m_pHunger.GetComponent<Slider>().value += HungerCreepVal * Time.deltaTime;
 
-        float fDifficulty = ( Time.time - BoredomIncreaseStartTime ) / BoredomIncreaseDoublePeriod;
+        float fDifficulty = ( Time.time - m_fLoadTime - BoredomIncreaseStartTime ) / BoredomIncreaseDoublePeriod;
         float fRealBoredomCreep = BoredomCreepVal * ( 1 + Mathf.Max( fDifficulty, 0 ) );
 
         m_pAttention.GetComponent<Slider>().value += fRealBoredomCreep * Time.deltaTime;
