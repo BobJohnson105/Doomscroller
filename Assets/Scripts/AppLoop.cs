@@ -33,6 +33,7 @@ public class AppLoop : App, IDragHandler, IBeginDragHandler, IEndDragHandler
     public float AnimSpeed = 2.0f;
     Vector2 m_vStartDragPos;
     RectTransform m_pRectTransform;
+    float m_fTimeOnReel;
     public void OnDrag( PointerEventData eventData )
     {
         RectTransformUtility.ScreenPointToLocalPointInRectangle( m_pRectTransform, eventData.position, eventData.pressEventCamera, out Vector2 pos );
@@ -85,6 +86,7 @@ public class AppLoop : App, IDragHandler, IBeginDragHandler, IEndDragHandler
     IEnumerator EnableReels()
     {
         yield return new WaitForSeconds( 1.0f );
+        m_fTimeOnReel = 0.0f;
         m_pTopReel.Item1.gameObject.SetActive( true );
         m_pBotReel.Item1.gameObject.SetActive( true );
     }
@@ -132,7 +134,7 @@ public class AppLoop : App, IDragHandler, IBeginDragHandler, IEndDragHandler
             );
         else if ( pReel.Item2 == typeof( Cat ) )
             SetDeltas( 
-                (StatType.FULFILLMENT, 0.05f)
+                (StatType.ANGER, 0.05f)
             );
         else if ( pReel.Item2 == typeof( Crosspost ) )
             SetDeltas( 
@@ -140,7 +142,7 @@ public class AppLoop : App, IDragHandler, IBeginDragHandler, IEndDragHandler
             );
         else if ( pReel.Item2 == typeof( Repost ) )
             SetDeltas( 
-                (StatType.ATTENTION, 0.05f)
+                (StatType.STRESS, 0.05f)
             );
     }
 
@@ -148,6 +150,14 @@ public class AppLoop : App, IDragHandler, IBeginDragHandler, IEndDragHandler
     protected override void Update()
     {
         base.Update();
+        const float ATTENTION_SPAN = 5.0f;
+        m_fTimeOnReel += Time.deltaTime;
+
+        if ( m_fTimeOnReel >= ATTENTION_SPAN )
+            m_pStats[ 4 ].Item2 = 0.05f;
+        else
+            m_pStats[ 4 ].Item2 = -0.05f;
+
         if ( m_iAnimState != AnimState.NONE ) //update called frequently, save us some work
         {
             float fAnimDist = AnimSpeed * Time.deltaTime;
@@ -176,6 +186,7 @@ public class AppLoop : App, IDragHandler, IBeginDragHandler, IEndDragHandler
 
                     m_pBotReel.Item1.StopAllCoroutines();
                     m_pBotReel.Item1.StartCoroutine( m_pBotReel.Item1.PlayVideo() );
+                    m_fTimeOnReel = 0.0f;
                 }
                 m_iAnimState = AnimState.NONE;
                 return;

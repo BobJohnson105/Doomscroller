@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public enum StatType
 {
-    FULFILLMENT,
+    ANGER,
     DEPRESSION,
     HUNGER,
     STRESS,
@@ -15,16 +15,16 @@ public enum StatType
 public class App : MonoBehaviour
 {
     // sliders and their change per second
-    // 0: fulfillment
+    // 0: anger
     // 1: depression
     // 2: hunger
     // 3: stress
     // 4: attention
-    readonly (Slider, float)[] m_pStats = new (Slider, float)[ 5 ];
+    protected readonly (Slider, float)[] m_pStats = new (Slider, float)[ 5 ];
 
     protected virtual void OnEnable()
     {
-        m_pStats[ 0 ].Item1 = GameObject.Find( "fulfillment" ).GetComponent<Slider>();
+        m_pStats[ 0 ].Item1 = GameObject.Find( "anger" ).GetComponent<Slider>();
         m_pStats[ 1 ].Item1 = GameObject.Find( "depression" ).GetComponent<Slider>();
         m_pStats[ 2 ].Item1 = GameObject.Find( "hunger" ).GetComponent<Slider>();
         m_pStats[ 3 ].Item1 = GameObject.Find( "stress" ).GetComponent<Slider>();
@@ -46,7 +46,7 @@ public class App : MonoBehaviour
         {
             switch ( pDeltas[ i ].Item1 )
             {
-                case StatType.FULFILLMENT:
+                case StatType.ANGER:
                     m_pStats[ 0 ].Item2 = pDeltas[ i ].Item2;
                     break;
                 case StatType.DEPRESSION:

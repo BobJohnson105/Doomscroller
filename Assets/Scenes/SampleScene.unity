@@ -2949,6 +2949,7 @@ GameObject:
   - component: {fileID: 446780261}
   - component: {fileID: 446780263}
   - component: {fileID: 446780262}
+  - component: {fileID: 446780264}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -3018,6 +3019,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 446780260}
   m_CullTransparentMesh: 1
+--- !u!114 &446780264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 446780260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b718ec2487f5f05287635a2ce23a475, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &452118743
 GameObject:
   m_ObjectHideFlags: 0
@@ -3501,7 +3514,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ATTENTION
+  m_text: BOREDOM
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3528,7 +3541,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.05
+  m_fontSize: 21.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -11403,7 +11416,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: FULFILLMENT
+  m_text: ANGER
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11430,7 +11443,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16.6
+  m_fontSize: 21.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -11651,6 +11664,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1342009059}
   - component: {fileID: 1342009060}
+  - component: {fileID: 1342009061}
   m_Layer: 5
   m_Name: attention
   m_TagString: Untagged
@@ -11731,6 +11745,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1342009061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342009058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd5c10204646ddeb2b248cac1fc9a8c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1344967183
 GameObject:
   m_ObjectHideFlags: 0
@@ -13099,6 +13125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1548444007}
   - component: {fileID: 1548444008}
+  - component: {fileID: 1548444009}
   m_Layer: 5
   m_Name: hunger
   m_TagString: Untagged
@@ -13179,6 +13206,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1548444009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548444006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69d8887ea17e62f66882403c8282ff83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1565815760
 GameObject:
   m_ObjectHideFlags: 0
@@ -14677,7 +14716,7 @@ GameObject:
   - component: {fileID: 1806259318}
   - component: {fileID: 1806259319}
   m_Layer: 5
-  m_Name: fulfillment
+  m_Name: anger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15569,7 +15608,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 0.08627451}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
