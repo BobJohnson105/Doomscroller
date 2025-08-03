@@ -14,6 +14,8 @@ public class BackgroundEffects : MonoBehaviour
     Hunger m_pHunger;
     Stress m_pStress;
     MessageAlertNotif m_pMessageAlertNotif;
+
+    Slider[] m_pAllSliders;
     float m_fLoadTime;
 
     void OnEnable()
@@ -23,6 +25,7 @@ public class BackgroundEffects : MonoBehaviour
         m_pHunger = GetComponentInChildren<Hunger>();
         m_pStress = GetComponentInChildren<Stress>();
         m_pMessageAlertNotif = FindObjectOfType<MessageAlertNotif>( true );
+        m_pAllSliders = GetComponentsInChildren<Slider>();
     }
 
     void Update()
@@ -37,5 +40,17 @@ public class BackgroundEffects : MonoBehaviour
         if ( m_pMessageAlertNotif.gameObject.activeSelf )
             m_pStress.GetComponent<Slider>().value += StressMessageCreepVal * Time.deltaTime;
 
+        foreach ( var slider in m_pAllSliders )
+        {
+            if ( slider.value == slider.maxValue )
+            {
+
+                //game over
+            }
+        }
+        if ( Time.time - m_fLoadTime > 60 * 4 )
+        {
+            //game over (win)
+        }
     }
 }
