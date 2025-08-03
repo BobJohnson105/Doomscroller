@@ -42,7 +42,8 @@ public class Reel : MonoBehaviour
     public void SetFrames( IEnumerable<Texture> pFrames )
     {
         m_pFrames.Clear();
-        m_pFrames.AddRange( pFrames );
+        if ( pFrames != null && pFrames.Any() )
+            m_pFrames.AddRange( pFrames );
     }
 
     IEnumerator PlayVideo()

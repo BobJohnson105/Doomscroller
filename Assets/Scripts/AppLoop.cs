@@ -162,6 +162,10 @@ public class AppLoop : App, IDragHandler, IBeginDragHandler, IEndDragHandler
     void OnDisable()
     {
         ZeroAllDeltas();
+        m_pTopReel.Item1.SetFrames( null );
+        m_pBotReel.Item1.SetFrames( null );
+        m_pTopReel.Item1.GetComponent<RawImage>().texture = null;
+        m_pBotReel.Item1.GetComponent<RawImage>().texture = null;
     }
 
 }
