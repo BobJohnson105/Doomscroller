@@ -50,13 +50,13 @@ public class Reel : MonoBehaviour
     {
         while ( true )
         {
-            yield return new WaitForSeconds( 1.0f / FPS );
             if ( m_pFrames.Any() )
             {
                 m_iAnimFrame++;
                 m_iAnimFrame %= m_pFrames.Count;
                 m_pImage.texture = m_pFrames[ m_iAnimFrame ];
             }
+            yield return new WaitForSeconds( 1.0f / FPS );
         }
     }
 }

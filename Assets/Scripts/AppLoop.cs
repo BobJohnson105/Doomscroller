@@ -57,7 +57,7 @@ public class AppLoop : App, IDragHandler, IBeginDragHandler, IEndDragHandler
     {
         base.OnEnable();
         m_fScrollProgress = 0.0f;
-        Reel[] pReels = transform.GetComponentsInChildren<Reel>();
+        Reel[] pReels = transform.GetComponentsInChildren<Reel>( true );
         m_pRectTransform = GetComponent<RectTransform>();
 
         m_pTopReel.Item1 = pReels[ 0 ];
@@ -72,9 +72,20 @@ public class AppLoop : App, IDragHandler, IBeginDragHandler, IEndDragHandler
         SelectNextVideo( ref m_pTopReel );
         SelectNextVideo( ref m_pBotReel );
 
+
+
         SetDeltas( m_pTopReel );
 
         GetComponentsInChildren<LoopVideo>();
+
+        StartCoroutine( EnableReels() );
+    }
+
+    IEnumerator EnableReels()
+    {
+        yield return new WaitForSeconds( 1.0f );
+        m_pTopReel.Item1.gameObject.SetActive( true );
+        m_pBotReel.Item1.gameObject.SetActive( true );
     }
 
     void SelectNextVideo( ref (Reel, Type) pReel )
@@ -85,21 +96,29 @@ public class AppLoop : App, IDragHandler, IBeginDragHandler, IEndDragHandler
             iTotalWeightCount += pReelType.Item2;
         float fRandomVal = r.Next( iTotalWeightCount );
         int iCurrentWeightCount = 0;
-        foreach ( (Type, int) pReelType in s_pReelTypes )
+        for ( int i = 0; i < s_pReelTypes.Length; ++i )
         {
-            iCurrentWeightCount += pReelType.Item2;
+            Type pReelType = s_pReelTypes[ i ].Item1;
+            int iReelWeight = s_pReelTypes[ i ].Item2;
+            iCurrentWeightCount += iReelWeight;
             if ( iCurrentWeightCount > fRandomVal )
             {
-                LoopVideo[] pVideos = s_mapReelVideos[ pReelType.Item1 ];
+                LoopVideo[] pVideos = s_mapReelVideos[ pReelType ];
                 LoopVideo pVideo = pVideos[ r.Next( pVideos.Length ) ];
                 pReel.Item1.SetFrames( pVideo.GetComponentsInChildren<RawImage>().Select( i => i.texture ) );
-                pReel.Item2 = pReelType.Item1;
+                pReel.Item2 = pReelType;
+
+                for ( int j = 0; j < s_pReelTypes.Length; ++j )
+                    if ( s_pReelTypes[ j ].Item2 == 0 )
+                        s_pReelTypes[ j ].Item2 = 10;
+                s_pReelTypes[ i ].Item2 = 0;
+
                 break;
             }
         }
     }
 
-    void SetDeltas( (Reel, Type) pReel)
+    void SetDeltas( (Reel, Type) pReel )
     {
         /// HERE is where we set what each type of video does
         if ( pReel.Item2 == typeof( Cooking ) )
@@ -166,6 +185,8 @@ public class AppLoop : App, IDragHandler, IBeginDragHandler, IEndDragHandler
         m_pBotReel.Item1.SetFrames( null );
         m_pTopReel.Item1.GetComponent<RawImage>().texture = null;
         m_pBotReel.Item1.GetComponent<RawImage>().texture = null;
+        m_pTopReel.Item1.gameObject.SetActive( false );
+        m_pBotReel.Item1.gameObject.SetActive( false );
     }
 
 }
