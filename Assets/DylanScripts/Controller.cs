@@ -7,8 +7,8 @@ public class Controller : MonoBehaviour
 {
     public Canvas menu;
     public Canvas options;
-    public Animation startanim;
-    public Animation howtoanim;
+    public Animation anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,36 +32,34 @@ public class Controller : MonoBehaviour
     public void Back()
     {
         options.enabled = false;
-        menu.enabled = true; 
+        menu.enabled = true;
+    }
+    public void HowBack()
+    {
+        anim.Play("3");
+        options.enabled = false;
+        menu.enabled = true;
+
     }
     public void HowTo()
     {
         options.enabled = false;
         menu.enabled = false;
-        StartCoroutine(CamAnimHowTo());
+        anim.Play("2");
     }
 
 
     IEnumerator CamAnimStart()
     {
-        startanim.Play();
+        anim.Play();
         while (true)
         {
-            if (!startanim.isPlaying)
+            if (!anim.isPlaying)
             {
                 SceneManager.LoadSceneAsync("SampleScene");
             }
             yield return null;
         }
     }
-    IEnumerator CamAnimHowTo()
-    {
-        howtoanim.Play();
-        while (true)
-        {
-            if (!howtoanim.isPlaying)
-            
-            yield return null;
-        }
-    }
 }
+
