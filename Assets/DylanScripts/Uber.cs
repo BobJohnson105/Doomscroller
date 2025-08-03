@@ -8,6 +8,14 @@ public class Uber : MonoBehaviour
     public Canvas pay;
     public Canvas complete;
     // Start is called before the first frame update
+
+    private void OnEnable()
+    {
+        order.enabled = true;
+        pay.enabled = false;
+        complete.enabled = false;
+    }
+
     void Start()
     {
         order.enabled = true;
@@ -24,5 +32,14 @@ public class Uber : MonoBehaviour
     {
         pay.enabled = false;
         complete.enabled = true;
+        StartCoroutine(delay());
+    }
+
+    IEnumerator delay()
+    {
+        yield return new WaitForSeconds(5);
+        order.enabled = true;
+        pay.enabled = false;
+        complete.enabled = false;
     }
 }
