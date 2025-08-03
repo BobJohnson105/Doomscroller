@@ -37,8 +37,10 @@ public class AppLoop : App, IDragHandler, IBeginDragHandler, IEndDragHandler
     Vector2 m_vStartDragPos;
     RectTransform m_pRectTransform;
     float m_fTimeOnReel;
+    bool m_bInteractionEnabled = false;
     public void OnDrag( PointerEventData eventData )
     {
+        if ( !m_bInteractionEnabled ) return;
         RectTransformUtility.ScreenPointToLocalPointInRectangle( m_pRectTransform, eventData.position, eventData.pressEventCamera, out Vector2 pos );
         float fDeltaY = ( pos.y - m_vStartDragPos.y ) / m_pRectTransform.rect.height;
         m_fScrollProgress = Mathf.Clamp( fDeltaY + m_fDragStartScroll, 0.0f, 1.0f );
@@ -47,6 +49,7 @@ public class AppLoop : App, IDragHandler, IBeginDragHandler, IEndDragHandler
     }
     public void OnBeginDrag( PointerEventData eventData )
     {
+        if ( !m_bInteractionEnabled ) return;
         RectTransformUtility.ScreenPointToLocalPointInRectangle( m_pRectTransform, eventData.position, eventData.pressEventCamera, out m_vStartDragPos );
         m_iAnimState = AnimState.NONE;
         m_fDragStartScroll = m_fScrollProgress;
@@ -55,12 +58,14 @@ public class AppLoop : App, IDragHandler, IBeginDragHandler, IEndDragHandler
 
     public void OnEndDrag( PointerEventData eventData )
     {
+        if ( !m_bInteractionEnabled ) return;
         m_iAnimState = m_fScrollProgress >= 0.5f ? AnimState.UP : AnimState.DOWN;
     }
 
     protected override void OnEnable()
     {
         base.OnEnable();
+        m_bInteractionEnabled = false;
         m_fScrollProgress = 0.0f;
         Reel[] pReels = transform.GetComponentsInChildren<Reel>( true );
         m_pRectTransform = GetComponent<RectTransform>();
@@ -89,6 +94,7 @@ public class AppLoop : App, IDragHandler, IBeginDragHandler, IEndDragHandler
     IEnumerator EnableReels()
     {
         yield return new WaitForSeconds( 1.0f );
+        m_bInteractionEnabled = true;
         m_fTimeOnReel = 0.0f;
         m_pTopReel.Item1.gameObject.SetActive( true );
         m_pBotReel.Item1.gameObject.SetActive( true );
