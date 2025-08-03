@@ -7,9 +7,11 @@ public class MessageAlert : MonoBehaviour
     public float m_fMaxTime;
     public float m_fMinTime;
     MessageAlertNotif m_pNotif;
+    MessageTopBarNotif m_pTopBarNotif;
     void OnEnable()
     {
         m_pNotif = GetComponentInChildren<MessageAlertNotif>( true );
+        m_pTopBarNotif = transform.parent.GetComponentInChildren<MessageTopBarNotif>( true );
         StartCoroutine( NewMessage() );
     }
 
@@ -17,10 +19,12 @@ public class MessageAlert : MonoBehaviour
     {
         yield return new WaitForSeconds( Random.value * ( m_fMaxTime - m_fMinTime ) + m_fMinTime );
         m_pNotif.gameObject.SetActive( true );
+        m_pTopBarNotif.gameObject.SetActive( true );
     }
 
     public void DisableAlert()
     {
         m_pNotif.gameObject.SetActive( false );
+        m_pTopBarNotif.gameObject.SetActive( false );
     }
 }
