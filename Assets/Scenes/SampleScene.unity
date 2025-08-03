@@ -14962,7 +14962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e47ed0435b5153593a90190214e40811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AnimSpeed: 1.5
+  AnimSpeed: 3
 --- !u!82 &1908099988
 AudioSource:
   m_ObjectHideFlags: 0

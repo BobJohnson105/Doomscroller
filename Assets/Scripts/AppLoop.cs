@@ -156,7 +156,14 @@ public class AppLoop : App, IDragHandler, IBeginDragHandler, IEndDragHandler
             else if ( m_iAnimState == AnimState.DOWN )
                 fMaxDist = m_fScrollProgress;
 
-            if ( fMaxDist == 0.0f )
+
+            float fRealAnimDist = Mathf.Min( fAnimDist, fMaxDist ) * (int)m_iAnimState;
+
+            m_fScrollProgress += fRealAnimDist;
+            m_pTopReel.Item1.Pos += fRealAnimDist;
+            m_pBotReel.Item1.Pos += fRealAnimDist;
+
+            if ( m_fScrollProgress >= 1.0f || m_fScrollProgress <= -1.0f )
             {
                 if ( m_iAnimState == AnimState.UP )
                 {
@@ -165,17 +172,16 @@ public class AppLoop : App, IDragHandler, IBeginDragHandler, IEndDragHandler
                     (m_pBotReel, m_pTopReel) = (m_pTopReel, m_pBotReel);
                     SelectNextVideo( ref m_pBotReel );
                     SetDeltas( m_pTopReel );
+
+                    m_pBotReel.Item1.StopAllCoroutines();
+                    m_pBotReel.Item1.StartCoroutine( m_pBotReel.Item1.PlayVideo() );
                 }
                 m_iAnimState = AnimState.NONE;
                 return;
             }
-
-            fAnimDist = Mathf.Min( fAnimDist, fMaxDist ) * (int)m_iAnimState;
-
-            m_fScrollProgress += fAnimDist;
-            m_pTopReel.Item1.Pos += fAnimDist;
-            m_pBotReel.Item1.Pos += fAnimDist;
         }
+        if ( Input.GetKeyDown( KeyCode.DownArrow ) || Input.GetKey( KeyCode.DownArrow ) )
+            m_iAnimState = AnimState.UP;
     }
 
     void OnDisable()

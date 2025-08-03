@@ -46,7 +46,7 @@ public class Reel : MonoBehaviour
             m_pFrames.AddRange( pFrames );
     }
 
-    IEnumerator PlayVideo()
+    public IEnumerator PlayVideo()
     {
         while ( true )
         {
