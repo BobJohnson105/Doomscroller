@@ -31,6 +31,9 @@ public class AppLoop : App, IDragHandler, IBeginDragHandler, IEndDragHandler
     (Reel, Type) m_pBotReel;
     AnimState m_iAnimState;
     public float AnimSpeed = 2.0f;
+    public float AttentionSpan = 5.0f;
+    public float NewReelBoredomDecrease = 0.05f;
+    public float OldReelBoredomIncrease = 0.05f;
     Vector2 m_vStartDragPos;
     RectTransform m_pRectTransform;
     float m_fTimeOnReel;
@@ -123,26 +126,34 @@ public class AppLoop : App, IDragHandler, IBeginDragHandler, IEndDragHandler
 
     void SetDeltas( (Reel, Type) pReel )
     {
+        const float MassiveIncrease = 0.05f;
+        const float Increase = 0.02f;
         /// HERE is where we set what each type of video does
         if ( pReel.Item2 == typeof( Cooking ) )
             SetDeltas( 
-                (StatType.HUNGER, 0.05f)
+                (StatType.HUNGER, Increase),
+                (StatType.ANGER, -Increase),
+                (StatType.STRESS, -Increase)
             );
         else if ( pReel.Item2 == typeof( News ) )
             SetDeltas( 
-                (StatType.DEPRESSION, 0.05f)
+                (StatType.DEPRESSION, MassiveIncrease),
+                (StatType.ANGER, MassiveIncrease),
+                (StatType.STRESS, MassiveIncrease)
             );
         else if ( pReel.Item2 == typeof( Cat ) )
             SetDeltas( 
-                (StatType.ANGER, 0.05f)
+                (StatType.ANGER, -Increase),
+                (StatType.STRESS, -Increase)
             );
         else if ( pReel.Item2 == typeof( Crosspost ) )
             SetDeltas( 
-                (StatType.STRESS, 0.05f)
+                (StatType.DEPRESSION, Increase)
             );
         else if ( pReel.Item2 == typeof( Repost ) )
             SetDeltas( 
-                (StatType.STRESS, 0.05f)
+                (StatType.DEPRESSION, Increase),
+                (StatType.ANGER, Increase)
             );
     }
 
@@ -150,13 +161,12 @@ public class AppLoop : App, IDragHandler, IBeginDragHandler, IEndDragHandler
     protected override void Update()
     {
         base.Update();
-        const float ATTENTION_SPAN = 5.0f;
         m_fTimeOnReel += Time.deltaTime;
 
-        if ( m_fTimeOnReel >= ATTENTION_SPAN )
-            m_pStats[ 4 ].Item2 = 0.05f;
+        if ( m_fTimeOnReel >= AttentionSpan )
+            m_pStats[ 4 ].Item2 = OldReelBoredomIncrease;
         else
-            m_pStats[ 4 ].Item2 = -0.05f;
+            m_pStats[ 4 ].Item2 = -NewReelBoredomDecrease;
 
         if ( m_iAnimState != AnimState.NONE ) //update called frequently, save us some work
         {
