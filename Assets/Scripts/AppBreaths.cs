@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class AppBreaths : App
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void OnEnable()
     {
-        
+        base.OnEnable();
+        SetDeltas( (StatType.DEPRESSION, -0.05f) );
     }
 
     // Update is called once per frame

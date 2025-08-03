@@ -144,7 +144,8 @@ public class AppLoop : App, IDragHandler, IBeginDragHandler, IEndDragHandler
         else if ( pReel.Item2 == typeof( Cat ) )
             SetDeltas( 
                 (StatType.ANGER, -Increase),
-                (StatType.STRESS, -Increase)
+                (StatType.STRESS, -Increase),
+                (StatType.DEPRESSION, Increase)
             );
         else if ( pReel.Item2 == typeof( Crosspost ) )
             SetDeltas( 

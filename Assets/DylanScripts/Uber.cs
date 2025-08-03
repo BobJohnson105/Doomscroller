@@ -1,23 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Uber : MonoBehaviour
+public class Uber : App
 {
     public Canvas order;
     public Canvas pay;
     public Canvas complete;
-    // Start is called before the first frame update
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
-        order.enabled = true;
-        pay.enabled = false;
-        complete.enabled = false;
-    }
-
-    void Start()
-    {
+        base.OnEnable();
         order.enabled = true;
         pay.enabled = false;
         complete.enabled = false;
@@ -33,6 +27,8 @@ public class Uber : MonoBehaviour
         pay.enabled = false;
         complete.enabled = true;
         StartCoroutine(delay());
+
+        m_pStats[ 2 ].Item1.value -= 0.5f;
     }
 
     IEnumerator delay()
